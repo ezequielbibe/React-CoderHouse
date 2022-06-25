@@ -1,6 +1,7 @@
 import React from "react";
-import Logo from '../assets/Logo.png';
+import Logo from '../../assets/images/Logo.png';
 import NavBar from './NavBar';
+import CartWidget from './CartWidget';
 
 const Header = () => {
     return (
@@ -10,6 +11,7 @@ const Header = () => {
                 <h1>Cheto Celu</h1>
             </div>
             <NavBar />
+            <CartWidget />
         </header>
     )
 }
