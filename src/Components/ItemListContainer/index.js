@@ -24,9 +24,9 @@ const ItemListContainer = ({greeting}) => {
 
     return(
         <>
-            <h3>Bienvenido {greeting}</h3>
-            <ItemCount stock="9" initial="1" name="Samsung A53" price="93000" />
-            {loading ? <p>Cargando...</p> : <ItemList productList={productList}/> }
+          <h3>Bienvenido {greeting}</h3>
+          <ItemCount stock="9" initial="1" name="Samsung A53" price="93000" />
+          {loading ? <p>Cargando...</p> : <ItemList productList={productList}/> }
         </>    
     );
 };

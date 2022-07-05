@@ -1,7 +1,7 @@
-import { height } from '@mui/system';
 import React from 'react';
 import Header from './Components/Header';
 import ItemListContainer from './Components/ItemListContainer';
+import ItemDetailContainer from './Components/ItemDetailContainer';
 
 const App = () => {
 
@@ -10,6 +10,7 @@ const App = () => {
             <Header />
             <div style={styles.main}>
                 <ItemListContainer greeting="Coder House"/>
+                <ItemDetailContainer />
             </div>
         </>
     );
