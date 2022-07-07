@@ -18,8 +18,11 @@ export default ItemList
 const styles={
     container:{
         display: 'flex',
+        height: 'auto',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '2rem',
     }
 }

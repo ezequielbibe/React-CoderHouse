@@ -1,34 +1,34 @@
 import React, {useEffect, useState} from "react";
-import ItemCount from '../ItemCount';
 import ItemList from "../ItemList";
 import { getData } from "../../mocks/fakeApi";
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = ({greeting}) => {
-    const [productList, setProductList]=useState([])
-    const [loading, setLoading]=useState(true)
 
-    const getProducts = async () => {
-        try{
-          const respuesta = await getData
-          setProductList(respuesta)
-        }catch(error){
-          console.log(error)
-        }finally{
-          setLoading(false)
-        }
-      }
+  const [productList, setProductList]=useState([])
+  const [loading, setLoading]=useState(true)
 
-      useEffect(()=>{
-        getProducts()
-      },[])
+  const { idCategory } = useParams()
 
-    return(
-        <>
-          <h3>Bienvenido {greeting}</h3>
-          <ItemCount stock="9" initial="1" name="Samsung A53" price="93000" />
-          {loading ? <p>Cargando...</p> : <ItemList productList={productList}/> }
-        </>    
-    );
+  useEffect(()=>{
+    getData(idCategory)
+    .then((res) => {
+      setProductList(res);
+    })
+    .catch((res)=> {
+      console.log(res);
+    })
+    .finally(() => {
+      setLoading(false);
+    })
+  },[idCategory])
+
+  return(
+    <>
+      <h3>Bienvenido {greeting}</h3>
+      {loading ? <p>Cargando...</p> : <ItemList productList={productList}/> }
+    </>    
+  );
 };
 
 export default ItemListContainer;

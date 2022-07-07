@@ -1,8 +1,9 @@
-import { Description } from "@mui/icons-material";
 import React from "react";
+import ItemCount from "../ItemCount";
 
 const ItemDetail = ({product}) => {
-    const {marca, modelo, precio, caracteristicas, img} = product
+    console.log(product)
+    const {marca, modelo, precio, caracteristicas, img, stock} = product
     return(
         <div style={styles.container}>
             <div style={styles.box1}>
@@ -14,8 +15,7 @@ const ItemDetail = ({product}) => {
                 <h2>{marca} {modelo}</h2>
                 <p>${precio}</p>
                 <p>{caracteristicas}</p>
-                <button>Comprar</button>
-                <button>Añadir al carrito</button>
+                <ItemCount stock={stock} initial="1" price={precio} />
             </div>
         </div>
     );
@@ -26,10 +26,11 @@ export default ItemDetail;
 const styles = {
     container:{ 
         width: '100%',
-        height: '100vh',
+        height: 'calc(100vh - 3rem)',
         borderTop: '1px solid black',
         borderBottom: '1px solid black',
         padding: '2rem',
+        boxSizing: 'border-box',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

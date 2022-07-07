@@ -1,25 +1,25 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 const  menuItems = [
     {
         id:1,
         label: 'Home',
-        href: '/',
+        path: '/',
     },
     {
         id:2,
         label: 'Celulares',
-        href: '/',
+        path: '/category/celulares',
     },
     {
         id:3,
-        label: 'Quienes Somos',
-        href: '/',
+        label: 'Computadoras',
+        path: '/category/computadoras',
     },
     {
         id:4,
-        label: 'Contacto',
-        href: '/',
+        label: 'Televisores',
+        path: '/category/televisores',
     },
 ];
 
@@ -29,7 +29,7 @@ const NavBar = ()=> {
         <nav style={styles.nav}>
             <ul style={styles.nav}>
                 {menuItems.map((item) => (
-                    <li key={item.id}><a style={styles.a} href={item.href}>{item.label}</a></li>
+                    <Link key={item.id} style={styles.a} to={item.path}>{item.label}</Link>
                 ))}
             </ul>
         </nav>
