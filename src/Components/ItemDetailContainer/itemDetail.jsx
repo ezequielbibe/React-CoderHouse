@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import ItemCount from "../ItemCount";
+import { Link } from 'react-router-dom';
 
 const ItemDetail = ({product}) => {
+
+    const [finalizar, setFinalizar] = useState(true);
+    const finalizarCompra = () => {
+        setFinalizar(false);
+    }
+
     console.log(product)
     const {marca, modelo, precio, caracteristicas, img, stock} = product
     return(
@@ -15,7 +22,7 @@ const ItemDetail = ({product}) => {
                 <h2>{marca} {modelo}</h2>
                 <p>${precio}</p>
                 <p>{caracteristicas}</p>
-                <ItemCount stock={stock} initial="1" price={precio} />
+                {finalizar ? <ItemCount stock={stock} initial="1" price={precio} finalizarCompra={finalizarCompra}/> : <Link to={"/cart"}><button>Finalizar Compra</button></Link> }
             </div>
         </div>
     );

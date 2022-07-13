@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const ItemCount = ({stock, initial, price}) => {
+const ItemCount = ({stock, initial, price, finalizarCompra}) => {
 
     const [cuenta, setCuenta] = useState(parseInt(initial))
     const count = (value) => {
@@ -21,7 +21,7 @@ const ItemCount = ({stock, initial, price}) => {
             </div>
             <p>Total: ${parseInt(price) * cuenta}</p>
             <button>Comprar</button>
-            <button>Añadir al carrito</button>
+            <button onClick={finalizarCompra}>Añadir al carrito</button>
         </div>
     );
 };
