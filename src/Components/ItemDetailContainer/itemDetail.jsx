@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ItemCount from "../ItemCount";
 import { Link } from 'react-router-dom';
+import { cartContext } from '../../Context/CartContext';
 
 const ItemDetail = ({product}) => {
+    const { agregarProducto, Productos } = useContext(cartContext);
 
     const [finalizar, setFinalizar] = useState(true);
-    const finalizarCompra = () => {
-        setFinalizar(false);
-    }
 
-    console.log(product)
+    const finalizarCompra = (count) => {
+        agregarProducto({...product, cantidad:count});
+        setFinalizar(false);
+    };
+
     const {marca, modelo, precio, caracteristicas, img, stock} = product
     return(
         <div style={styles.container}>

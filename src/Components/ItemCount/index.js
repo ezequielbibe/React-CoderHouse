@@ -5,7 +5,7 @@ const ItemCount = ({stock, initial, price, finalizarCompra}) => {
 
     const [cuenta, setCuenta] = useState(parseInt(initial))
     const count = (value) => {
-        const result = cuenta + value;
+        let result = cuenta + value;
         if(result <= stock && result >= parseInt(initial)) {
             setCuenta(cuenta + value)
         };
@@ -21,7 +21,7 @@ const ItemCount = ({stock, initial, price, finalizarCompra}) => {
             </div>
             <p>Total: ${parseInt(price) * cuenta}</p>
             <button>Comprar</button>
-            <button onClick={finalizarCompra}>Añadir al carrito</button>
+            <button onClick={()=>finalizarCompra(cuenta)}>Añadir al carrito</button>
         </div>
     );
 };

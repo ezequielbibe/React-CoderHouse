@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import {cartContext} from '../../Context/CartContext';
 
 const CartWidget = () => {
+
+    const { cantidadProd } = useContext(cartContext);
+
     return(
-        <button style={styles.button}><ShoppingBagIcon style={styles.icon}/></button>
+        <button style={styles.button}>
+            <p>{cantidadProd}</p>
+            <ShoppingBagIcon style={styles.icon}/>
+        </button>
     );
 };
 
@@ -14,6 +21,7 @@ const styles = {
     button: {
         borderColor: 'rgb(172, 0, 230)',
         backgroundColor: 'white',
+        display: 'flex',
     },
     icon:{
         color: 'rgb(172, 0, 230)',
