@@ -8,7 +8,7 @@ const CartWidget = () => {
 
     return(
         <button style={styles.button}>
-            <p>{cantidadProd}</p>
+            {cantidadProd !== 0 && <p>{cantidadProd}</p>}
             <ShoppingBagIcon style={styles.icon}/>
         </button>
     );

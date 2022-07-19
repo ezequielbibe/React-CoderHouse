@@ -11,10 +11,18 @@ const CartCustomProvider = ({ children }) => {
 
     const [cantidadProd, setCantidadProd] = useState(0);
 
+    const [precioTotal, setPrecioTotal] = useState(0);
+
     useEffect(() => {
         consultarCantidadProd();
-        console.log(Productos)
+        total()
     },[Productos])
+
+    const total = () => {
+        let tot = 0;
+        Productos.forEach(prod => tot += prod.cantidad * prod.precio);
+        setPrecioTotal(tot);
+    }
 
     const agregarProducto = (prod) => {
         if(consultaProductoEnCart(prod.id)) {
@@ -47,7 +55,7 @@ const CartCustomProvider = ({ children }) => {
     };
      
     return(
-        <Provider value={{Productos, cantidadProd, agregarProducto, quitarProducto, consultaProductoEnCart, consultarCantidadProd, limpiarProductos}}>
+        <Provider value={{Productos, cantidadProd, precioTotal, agregarProducto, quitarProducto, consultaProductoEnCart, consultarCantidadProd, limpiarProductos}}>
             {children}
         </Provider>
     );
