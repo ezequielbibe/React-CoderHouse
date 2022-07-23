@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Item = ({product}) => {
-    const {marca, modelo, precio, img} = product
+    const {marca, modelo, precio, img, id} = product
     return(
         <div style={styles.container}>
             <h3>{marca} {modelo}</h3>
@@ -10,7 +10,7 @@ const Item = ({product}) => {
                 <img src={img} alt={modelo} style={styles.img}/>
             </div>
             <p style={styles.precio}>${precio}</p>
-            <Link to={`/detail/${modelo}`} style={styles.button}>Ver mas</Link>
+            <Link to={`/detail/${id}`} style={styles.button}>Ver mas</Link>
         </div>
     );
 }

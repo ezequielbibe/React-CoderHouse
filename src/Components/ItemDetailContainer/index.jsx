@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getDataOnly } from '../../mocks/fakeApi';
 import ItemDetail from "./itemDetail";
 import { useParams } from 'react-router-dom';
+import { doc, getDoc, collection } from 'firebase/firestore';
+import { db } from "../../firebase/firebase";
 
 const ItemDetailContainer = () => {
   const [productList, setProductList] = useState([]);
@@ -9,9 +10,13 @@ const ItemDetailContainer = () => {
   const { idDetail } = useParams()
 
   useEffect(()=>{
-    getDataOnly(idDetail)
-    .then((res) => {
-      setProductList(res);
+
+    const productsCollection = collection(db, 'productos');
+    const refDoc = doc(productsCollection, idDetail);
+
+    getDoc(refDoc)
+    .then(result => {
+      setProductList(result.data())
     })
     .catch((res)=> {
       console.log(res);

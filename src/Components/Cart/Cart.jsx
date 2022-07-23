@@ -1,6 +1,13 @@
 import React, { useContext } from "react";
 import {cartContext} from '../../Context/CartContext';
 import { Link } from "react-router-dom";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const Cart = () => {
 
@@ -13,20 +20,29 @@ const Cart = () => {
                 {Productos.length === 0 
                     ? <h1>No hay nada en el carrito, ir a la <Link to="/">Tienda</Link></h1> 
                     : 
-                
-                Productos.map((prod)=>
-                    <div style={styles.item}>
-                        <div style={styles.itemNombre}>
-                            <h4>{prod.marca} {prod.modelo}</h4>
-                        </div>
-                        <div style={styles.itemCantidad}>
-                            <p>${prod.precio} x {prod.cantidad}</p>
-                        </div>
-                        <div style={styles.itemAcciones}>
-                            <button onClick={()=>quitarProducto(prod.id)}>Quitar</button>
-                        </div>
-                    </div>
-                )}
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Producto</TableCell>
+                                <TableCell align="right">Cantidad</TableCell>
+                                <TableCell align="right">Precio</TableCell>
+                                <TableCell align="right"></TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {Productos.map((prod) => (
+                                <TableRow key={prod.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    <TableCell component="th" scope="row">{prod.marca} {prod.modelo}</TableCell>
+                                    <TableCell align="right">{prod.cantidad}</TableCell>
+                                    <TableCell align="right">${prod.precio}</TableCell>
+                                    <TableCell align="right"><button onClick={()=>quitarProducto(prod.id)}>Quitar</button></TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+}
                 {Productos.length !== 0 && (<button onClick={limpiarProductos}>Limpiar carrito</button>)}
                 <p>Cantidad de productos total: {cantidadProd}</p>
             </div>

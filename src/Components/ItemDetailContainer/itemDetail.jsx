@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { cartContext } from '../../Context/CartContext';
 
 const ItemDetail = ({product}) => {
-    const { agregarProducto, Productos } = useContext(cartContext);
+    const { agregarProducto } = useContext(cartContext);
 
     const [finalizar, setFinalizar] = useState(true);
 

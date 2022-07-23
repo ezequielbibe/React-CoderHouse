@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import ItemList from "../ItemList";
-import { getData } from "../../mocks/fakeApi";
 import { useParams } from 'react-router-dom';
+import { db } from '../../firebase/firebase';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 const ItemListContainer = ({greeting}) => {
 
@@ -11,9 +12,18 @@ const ItemListContainer = ({greeting}) => {
   const { idCategory } = useParams()
 
   useEffect(()=>{
-    getData(idCategory)
-    .then((res) => {
-      setProductList(res);
+    const productsCollection = collection(db, 'productos');
+    const consulta = idCategory === undefined ? productsCollection : query(productsCollection, where('categoria', '==', idCategory));
+
+    getDocs(consulta)
+    .then(result => {
+      const lista = result.docs.map(product => {
+        return {
+          id: product.id,
+          ...product.data(),
+        }
+      })
+      setProductList(lista)
     })
     .catch((res)=> {
       console.log(res);
