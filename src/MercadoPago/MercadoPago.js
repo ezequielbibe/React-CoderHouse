@@ -21,8 +21,7 @@ const Pagar =  (a) => {
         window.location = init_point
     })
     .catch((error)=>{
-        console.log(error)
-        console.log(`soy error`)
+        console.error(error)
     })
     .finally(()=>{
         console.log(`se consumio la api de mercadopago`)

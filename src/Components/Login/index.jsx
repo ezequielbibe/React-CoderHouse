@@ -19,15 +19,16 @@ const Login = ({usuarioGlobal}) => {
             .then(()=> {
                 window.location = '/';
             })
-            .catch(()=>{
-                console.log('no entramos una mierda');
+            .catch((error)=>{
+                console.error(error);
             })
         }else {
-            await signInWithEmailAndPassword(auth, correo, password).then(()=> {
+            await signInWithEmailAndPassword(auth, correo, password)
+            .then(()=> {
                 window.location = '/';
             })
-            .catch(()=>{
-                console.log('no entramos una mierda');
+            .catch((error)=>{
+                console.log(error);
             })
         }
     };
