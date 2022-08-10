@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import ItemCount from "../ItemCount";
 import { Link } from 'react-router-dom';
 import { cartContext } from '../../Context/CartContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ItemDetail = ({product}) => {
     const { agregarProducto } = useContext(cartContext);
@@ -25,7 +26,7 @@ const ItemDetail = ({product}) => {
                 <h2>{marca} {modelo}</h2>
                 <p>${precio}</p>
                 <p>{caracteristicas}</p>
-                {finalizar ? <ItemCount stock={stock} initial="1" price={precio} finalizarCompra={finalizarCompra}/> : <Link to={"/cart"}><button>Finalizar Compra</button></Link> }
+                {finalizar ? <ItemCount stock={stock} initial="1" price={precio} finalizarCompra={finalizarCompra}/> : <Link to={"/cart"}><button style={styles.btn}>Finalizar Compra</button></Link> }
             </div>
         </div>
     );
@@ -35,29 +36,39 @@ export default ItemDetail;
 
 const styles = {
     container:{ 
-        width: '100%',
-        height: 'calc(100vh - 3rem)',
-        borderTop: '1px solid black',
-        borderBottom: '1px solid black',
+        width: '80%',
+        height: 'calc(100vh - 6rem)',
         padding: '2rem',
         boxSizing: 'border-box',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        gap: '5rem',
     },
     box1:{
-        width: '50%'
+        width: '50%',
+        height: '30rem',
+        backgroundColor: 'white',
+        border: '2px solid rgb(185, 123, 123)',
     },
     box2:{
-        width: '50%'
+        display: 'flex',
+        flexDirection: 'column',
+        width: '50%',
+        gap: '2rem',
     },
     imgbox:{
-        width: '70%',
-        height: '70%',
+        width: '100%',
+        height: '100%',
     },
     img: {
         width: '100%',
         height: '100%',
-        objectFit: 'cover' 
-    }
+        objectFit: 'scale-down' 
+    },
+    btn: {
+        backgroundColor: 'rgb(185, 123, 123)',
+        borderRadius: '.3rem',
+        border: 'none',
+    },
 }

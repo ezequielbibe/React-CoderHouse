@@ -1,48 +1,74 @@
 import React from "react";
-import Logo from '../../assets/images/Logo.png';
 import NavBar from './NavBar';
 import CartWidget from './CartWidget';
-import { Link } from 'react-router-dom';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import LoginWidget from "./LoginWidget";
 
-const Header = () => {
+const Header = ({usuarioGlobal}) => {
+
     return (
         <header style={styles.container}>
             <div style={styles.containerLogo}>
-                <img style={styles.imagen} src={Logo} alt="Logo de la tienda"/>
-                <h1>Tecno Bahia</h1>
+                <StorefrontIcon />
+                <h1 style={styles.nombre}>Tecno Bahia</h1>
             </div>
             <NavBar />
-            <Link to='/cart'><CartWidget /></Link>
+            <div style={styles.buttons}>
+                <CartWidget usuarioGlobal={usuarioGlobal}/>
+                <LoginWidget usuarioGlobal={usuarioGlobal}/>
+            </div>
         </header>
     )
 }
 
 const styles = {
+    cerrarbtn: {
+        border: 'none',
+        textDecoration: 'none',
+        color: 'rgb(172, 59, 59)',
+        backgroundColor: 'rgb(185, 123, 123)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '.5rem',
+        border: 'none',
+        height: '2.5rem',
+        width: '2.5rem',
+    },
+    buttons: {
+        display: 'flex',
+        gap: '2rem',
+    },
+    link:{
+        textDecoration: 'none',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container:{
         display: 'flex',
-        height: '3rem',
+        height: '6rem',
         width: '100%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        padding: '1rem',
-        boxSizing: 'border-box',
-        borderBottom: '0.15rem solid rgb(172, 0, 230)',
-        margin: '0'
+
+        margin: '0',
+        backgroundColor: 'rgb(172, 59, 59)',
     },
     containerLogo: {
         display: 'flex',
         height: '2.5rem',
         width: 'auto',
         gap: '1rem',
+        backgroundColor: 'rgb(185, 123, 123)',
         alignItems: 'center',
-        border: '0.2rem outset rgb(172, 0, 230)',
         padding: '0rem .5rem',
         boxSizing: 'border-box',
         borderRadius: '1rem',
+        color: 'rgb(172, 59, 59)',
     },
-    imagen:{
-        height: '100%',
-        borderRadius: '1rem .5rem .5rem 1rem',
+    nombre:{
+        fontSize: '1.5rem',
     },
 }
 

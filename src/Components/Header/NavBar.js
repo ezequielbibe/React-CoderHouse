@@ -26,7 +26,7 @@ const  menuItems = [
 
 const NavBar = ()=> {
     return(
-        <nav style={styles.nav}>
+        <nav>
             <ul style={styles.nav}>
                 {menuItems.map((item) => (
                     <Link key={item.id} style={styles.a} to={item.path}>{item.label}</Link>
@@ -39,16 +39,21 @@ const NavBar = ()=> {
 
 const styles = {
     nav:{
+        width: '100%',
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         listStyleType: 'none',
-        gap:'2rem',
         fontSize:'1.2rem',
         fontWeight: 'bold',
+        gap: '2rem',
     },
     a:{
-        color:'rgb(172, 0, 230)',
+        color:'rgb(185, 123, 123)',
         textDecoration: 'none',
+        padding: '0',
+        margin: '0',
     },
 }
 

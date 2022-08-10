@@ -3,6 +3,7 @@ import ItemList from "../ItemList";
 import { useParams } from 'react-router-dom';
 import { db } from '../../firebase/firebase';
 import { getDocs, collection, query, where } from 'firebase/firestore';
+import Spinner from 'react-bootstrap/Spinner';
 
 const ItemListContainer = ({greeting}) => {
 
@@ -35,8 +36,11 @@ const ItemListContainer = ({greeting}) => {
 
   return(
     <>
-      <h3>Bienvenido {greeting}</h3>
-      {loading ? <p>Cargando...</p> : <ItemList productList={productList}/> }
+      {loading ? 
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      : <ItemList productList={productList}/>}
     </>    
   );
 };

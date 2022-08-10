@@ -16,7 +16,8 @@ const ItemDetailContainer = () => {
 
     getDoc(refDoc)
     .then(result => {
-      setProductList(result.data())
+      const prodId = {id: result.id, ...result.data()}
+      setProductList(...productList, prodId);
     })
     .catch((res)=> {
       console.log(res);
@@ -27,10 +28,18 @@ const ItemDetailContainer = () => {
   },[idDetail])
 
   return(
-    <div>
+    <div style={styles.a}>
       { loading === false && <ItemDetail product={productList}/> }
     </div>
   );
 };
 
 export default ItemDetailContainer;
+
+const styles = {
+  a:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+}

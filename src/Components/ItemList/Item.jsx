@@ -1,58 +1,108 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams} from "react-router-dom";
+import './style.css';
 
 const Item = ({product}) => {
-    const {marca, modelo, precio, img, id} = product
-    return(
-        <div style={styles.container}>
-            <h3>{marca} {modelo}</h3>
-            <div style={styles.imgbox}>
-                <img src={img} alt={modelo} style={styles.img}/>
-            </div>
-            <p style={styles.precio}>${precio}</p>
-            <Link to={`/detail/${id}`} style={styles.button}>Ver mas</Link>
-        </div>
-    );
-}
+    const [mouseBox, setMouseBox] = useState(1);
+    
+    const mouseBoxAction = (a) => {
+        setMouseBox(mouseBox + a); 
+    };
+    const { idCategory } = useParams()
+    let border = mouseBox === 0 ? "border" : 'nada';
+
+    const {marca ,modelo, precio, img, id} = product;
+
+    if(idCategory === undefined){
+        return(
+            <Link to={`/detail/${id}`} style={styles.link}> 
+                <div className={border} style={styles.container} onMouseEnter={()=>mouseBoxAction(-1)} onMouseLeave={()=>mouseBoxAction(1)}>
+                    <div style={styles.imgbox}>
+                        <img src={img} alt={modelo} style={styles.img}/>
+                    </div>
+                    <p style={styles.precio}>${precio}</p>
+                </div>
+            </Link>
+        );
+    }else{
+        return(
+            <Link to={`/detail/${id}`} style={styles.linkB}> 
+                <div className={border} style={styles.containerB}>
+                    <div style={styles.imgboxB}>
+                        <img src={img} alt={modelo} style={styles.img}/>
+                    </div>
+                    <div style={styles.containerText}>
+                        <h3 style={styles.text}>{marca} {modelo}</h3>
+                        <p style={styles.precio}>${precio}</p>
+                    </div>
+                </div>
+            </Link>
+        );
+    };
+};
 
 export default Item;
 
 
 const styles = {
+    link: {
+        textDecoration: 'none',
+    },
+    linkB: {
+        textDecoration: 'none',
+        width: '100%'
+    },
+    containerB: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: '0.5rem',
+        width: '100%',
+        height: '10rem',
+        padding: '.5rem',
+        boxSizing: 'border-box',
+        borderRadius: '10px',
+        backgroundColor: 'white',
+    },
+    containerText: {
+        width: '80%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    text:{
+        fontSize: '1.1rem',
+        color: 'rgb(172, 59, 59)'
+    },
+    imgboxB: {
+        width: '20%',
+        height: '100%',
+    },
     container: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         gap: '0.5rem',
-        width: '20rem',
-        height: '30rem',
+        width: '10rem',
+        height: '15rem',
         padding: '.5rem',
         boxSizing: 'border-box',
-        boxShadow: '0px -1px 24px 3px rgba(0,0,0,0.44)',
         borderRadius: '10px',
-        border: '1px solid rgb(172, 0, 230)'
+        backgroundColor: 'white',
     },
     img:{
         width: '100%',
         height: '100%',
-        objectFit: 'cover',
+        objectFit: 'scale-down',
     },
     imgbox: {
         width: '100%',
-        height: '60%',
-    },
-    button: {
-        width: '5rem',
-        height: '2rem',
-        paddin: '0.5rem',
-        boxSizing: 'border-box',
-        backgroundColor: 'rgb(172, 0, 230)',
-        color: 'white',
-        borderRadius: '5px',
-        textAlign: 'center'
+        height: '80%',
     },
     precio: {
         fontSize: '1.2rem',
+        color: 'black',
     }
 }

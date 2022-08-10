@@ -53,7 +53,7 @@ const CartCustomProvider = ({ children }) => {
     const limpiarProductos = () => {
         setProductos([]);
     };
-     
+
     return(
         <Provider value={{Productos, cantidadProd, precioTotal, agregarProducto, quitarProducto, consultaProductoEnCart, consultarCantidadProd, limpiarProductos}}>
             {children}

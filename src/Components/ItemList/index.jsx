@@ -1,14 +1,25 @@
 import React from "react";
-import Item from "./Item"
+import { useParams } from 'react-router-dom';
+import Item from "./Item";
+import Redes from '../Redes';
+import CarouselBox from "../Carousel";
+import Acordeon from "../Acordeon";
+import Otros from "../Otros";
 
 const ItemList = ( {productList} ) =>{
 
+    const { idCategory } = useParams()
+    const defContainer = !idCategory ? styles.container : styles.containerB;
     return(
-        <div>
-            <h3>Lista de Productos</h3>
-            <div style={styles.container}>
+        <div style={styles.main}>
+            <CarouselBox />
+            <Otros />
+            <h3>Lista de {idCategory ? idCategory : "Productos"}</h3>
+            <div style={defContainer}>
                 {productList.map((product) => <Item key={product.id} product={product} />)}
             </div>
+            <Acordeon />
+            <Redes />
         </div>
     );
 };
@@ -16,10 +27,28 @@ const ItemList = ( {productList} ) =>{
 export default ItemList
 
 const styles={
-    container:{
+
+    main: {
         display: 'flex',
-        height: 'auto',
-        flexDirection: 'row',
+        minHeight: 'calc(100vh - 12rem)',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '2rem',
+        marginBottom: '2rem',
+    },
+    container:{
+        width: '50%',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '2rem',
+    },
+    containerB: {
+        width: '50%',
+        display: 'flex',
+        flexDirection: "column",
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexWrap: 'wrap',
